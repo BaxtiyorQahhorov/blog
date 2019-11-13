@@ -9,7 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $description
+ * @property string $content
+ *
+ * @property Article[] $articles
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -27,8 +29,11 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name'],'required'],
+            [['name'],'unique'],
+            [['name'],'string','max'=>255,'min'=>10],
+            [['content'], 'required'],
+            [['content'], 'string', 'max'=>500],
         ];
     }
 
@@ -40,7 +45,15 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'description' => 'Description',
+            'content' => 'Content',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticles()
+    {
+        return $this->hasMany(Article::className(), ['category_id' => 'id']);
     }
 }
