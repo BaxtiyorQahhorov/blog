@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Article;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,6 +38,7 @@ class ArticleController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find(),
+            'pagination' => new Pagination(['pageSize'=>2])
         ]);
 
         return $this->render('index', [

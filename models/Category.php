@@ -29,12 +29,18 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'],'required'],
-            [['name'],'unique'],
-            [['name'],'string','max'=>255,'min'=>10],
-            [['content'], 'required'],
-            [['content'], 'string', 'min'=>100, 'max'=>500],
+            [['name'], 'required'],
+            [['name'], 'unique'],
+            [['name'], 'string', 'max' => 255, 'min' => 3],
+            [['content'], 'string', 'min' => 10, 'max' => 500],
         ];
+    }
+
+    public function checkUnique($attribute, $params = [])
+    {
+        if (Category::find()->where(['name'=>$this->name])->exists()) {
+            $this->addError($attribute, "Name unique bo'lishi kere");
+        }
     }
 
     /**
@@ -45,7 +51,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'content' => 'Content',
+            'content' => 'Content asdas',
         ];
     }
 
@@ -55,5 +61,10 @@ class Category extends \yii\db\ActiveRecord
     public function getArticles()
     {
         return $this->hasMany(Article::className(), ['category_id' => 'id']);
+    }
+
+    public function getAbS()
+    {
+        return "asd";
     }
 }

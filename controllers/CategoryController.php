@@ -35,6 +35,12 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
+//        $category =new Category();
+//        echo $category->getAbs();
+//        echo $category->abS;
+//
+//        $categories = Category::find()->where(['=','id',7])->exists();
+
         $dataProvider = new ActiveDataProvider([
             'query' => Category::find(),
         ]);

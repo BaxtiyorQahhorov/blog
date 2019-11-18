@@ -27,14 +27,16 @@ class m191113_143922_create_article_table extends Migration
             'article',
             'author_id',
             'user',
-            'id'
+            'id',
+            'cascade'
         );
         $this->addForeignKey(
             'fk_article_category_id',
             'article',
             'category_id',
             'category',
-            'id'
+            'id',
+            'cascade'
         );
     }
 
