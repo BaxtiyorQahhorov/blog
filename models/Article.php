@@ -4,11 +4,13 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "article".
  *
  * @property int $id
+ * @property string $avatar
  * @property string $name
  * @property string $text
  * @property int $author_id
@@ -25,6 +27,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Article extends \yii\db\ActiveRecord
 {
+
+    public $file;
     /**
      * {@inheritdoc}
      */
@@ -57,6 +61,7 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
+            [['avatar'], 'string'],
             [['author_id', 'category_id', 'views'], 'integer'],
             [['date'], 'safe'],
             [['name'], 'string', 'max' => 255],
@@ -97,7 +102,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
 }

@@ -2,6 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Categories;
+use app\models\Category;
+use app\models\Product;
+use app\models\Variation;
 use Yii;
 use app\models\Article;
 use yii\data\ActiveDataProvider;
@@ -9,6 +13,7 @@ use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -66,9 +71,15 @@ class ArticleController extends Controller
      */
     public function actionCreate()
     {
+        //post_max_size
+        //upload_max_filesize
         $model = new Article();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $file = UploadedFile::getInstance($model, 'file');
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $avatarPath = 'uploads/' . time().$model->name . '.' . $file->extension;
+            $file->saveAs($avatarPath);
+            $model->avatar = $avatarPath;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

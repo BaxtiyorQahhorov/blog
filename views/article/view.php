@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <img src="<?php echo Url::base(true) ?>/<?php echo $model->avatar?>"  style="width:500px" />
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
