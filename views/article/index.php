@@ -18,28 +18,35 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="panel">
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'text:ntext',
-            'author_id',
-            [
-                'attribute'=>'category_id',
-                'value'=>'category.name'
-            ],
-            'created_at:datetime',
-            'updated_at:datetime',
-            'created_date_time',
-            'updated_date_time',
-            //'date',
+                    'id',
+                    'name',
+                    'text:ntext',
+                    [
+                        'attribute' => 'author_id',
+                        'value'=>'author.fullname'
+                    ],
+                    [
+                        'attribute'=>'category_id',
+                        'value'=>'category.name'
+                    ],
+                    'created_at:datetime',
+                    'updated_at:datetime',
+                    'created_date_time',
+                    'updated_date_time',
+                    //'date',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>
 
 
 </div>
